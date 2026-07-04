@@ -22,7 +22,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
       
       {/* COLUMN 1: Tourist Traps to Skip (Left, 5 cols) */}
       <section 
-        className="lg:col-span-5 bg-neutral-800/40 border border-neutral-700/40 rounded-2xl p-6 h-fit"
+        className="lg:col-span-5 glass-card rounded-2xl p-6 h-fit"
         aria-labelledby="traps-heading"
       >
         <div className="flex items-center gap-2 text-danger-600 mb-4">
@@ -40,7 +40,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
           {traps.map((trap, index) => (
             <li 
               key={index} 
-              className="bg-neutral-900/60 p-4 rounded-xl border border-neutral-800 hover:border-danger-700/20 transition-colors"
+              className="bg-red-500/5 p-4 rounded-xl border border-red-500/10 hover:border-danger-700/20 hover:bg-red-500/10 transition-all"
             >
               <div className="flex items-start gap-3">
                 <span className="flex items-center justify-center w-5 h-5 bg-danger-600/10 text-danger-600 rounded-full font-bold text-xs mt-0.5" aria-hidden="true">
@@ -63,7 +63,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
 
       {/* COLUMN 2: Authentic Hidden Gems (Right, 7 cols) */}
       <section 
-        className="lg:col-span-7 bg-neutral-800 border border-neutral-700/60 rounded-2xl p-6 shadow-lg"
+        className="lg:col-span-7 glass-card rounded-2xl p-6 shadow-lg"
         aria-labelledby="gems-heading"
       >
         <div className="flex items-center justify-between border-b border-neutral-700/50 pb-4 mb-6">
@@ -82,7 +82,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
           {gems.map((gem, index) => (
             <li 
               key={index}
-              className="group bg-neutral-900/40 hover:bg-neutral-900/80 p-5 rounded-xl border border-neutral-700/30 hover:border-brand-500/30 transition-all duration-300 relative"
+              className="group bg-white/50 hover:bg-white p-5 rounded-xl border border-neutral-600/20 hover:border-brand-500/35 hover:shadow-md transition-all duration-300 relative"
             >
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div className="flex-1">
@@ -116,7 +116,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
                 {/* Narrative Action Button */}
                 <button
                   onClick={() => handleSelect(gem.name)}
-                  className="flex items-center justify-center gap-1.5 self-end md:self-start bg-neutral-800 hover:bg-brand-500 hover:text-white text-neutral-300 font-bold text-xs py-2 px-3.5 rounded-lg border border-neutral-700/80 hover:border-transparent transition-all group/btn shadow-sm"
+                  className="flex items-center justify-center gap-1.5 self-end md:self-start bg-white/80 hover:bg-brand-500 hover:text-white text-brand-700 font-bold text-xs py-2 px-3.5 rounded-lg border border-brand-500/30 hover:border-transparent shadow-sm transition-all group/btn"
                   aria-label={`Listen to historical story about ${gem.name}`}
                 >
                   <span>Story</span>

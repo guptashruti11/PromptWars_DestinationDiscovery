@@ -9,7 +9,9 @@
   }
   
   body {
-    @apply bg-neutral-900 text-neutral-100 selection:bg-brand-500/30;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 30%, #e0f8ff 70%, #dbeafe 100%);
+    background-attachment: fixed;
+    @apply text-neutral-100 selection:bg-brand-500/30;
   }
 
   /* Custom scrollbar for premium aesthetic */
@@ -39,7 +41,6 @@
   animation: shimmer 1.4s ease infinite;
 }
 
-/* Accessible focus utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -50,4 +51,14 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05), 
+              0 1px 1px 0 rgba(255, 255, 255, 0.9), 
+              0 20px 40px -15px rgba(2, 132, 199, 0.03);
 }

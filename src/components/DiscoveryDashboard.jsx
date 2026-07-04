@@ -53,7 +53,7 @@ const DiscoveryDashboard = ({
   return (
     <div className="space-y-8 animate-fade-in-up">
       {/* Top Banner & Control Deck */}
-      <section className="bg-neutral-800 border border-neutral-700/60 rounded-2xl p-6 shadow-xl relative overflow-hidden" aria-label="Search controls">
+      <section className="glass-card rounded-2xl p-6 relative overflow-hidden" aria-label="Search controls">
         <div className="absolute top-0 right-0 w-80 h-80 bg-brand-500/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="flex justify-between items-start gap-4 mb-6">
@@ -69,7 +69,7 @@ const DiscoveryDashboard = ({
           {/* Settings / API Key Button */}
           <button
             onClick={() => setShowSettings(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 border border-neutral-700/80 hover:border-brand-500 rounded-lg text-xs font-semibold text-neutral-300 hover:text-brand-500 transition-all"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-white/70 hover:bg-white border border-neutral-600/30 hover:border-brand-500 rounded-lg text-xs font-bold text-brand-700 hover:text-brand-600 shadow-sm transition-all"
             aria-label="API Settings"
             aria-haspopup="dialog"
           >
@@ -92,7 +92,7 @@ const DiscoveryDashboard = ({
               value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
               placeholder="Enter destination (e.g. Tokyo, Paris, Rome)"
-              className="w-full pl-11 pr-4 py-3 bg-neutral-900 border border-neutral-700/80 rounded-xl text-neutral-200 placeholder-neutral-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all"
+              className="w-full pl-11 pr-4 py-3 bg-white/80 border border-neutral-600/30 rounded-xl text-neutral-50 placeholder-neutral-400 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
             />
           </div>
 
@@ -107,18 +107,18 @@ const DiscoveryDashboard = ({
               value={datesInput}
               onChange={(e) => setDatesInput(e.target.value)}
               placeholder="Travel Dates (e.g. May 10 - May 20)"
-              className="w-full pl-11 pr-4 py-3 bg-neutral-900 border border-neutral-700/80 rounded-xl text-neutral-200 placeholder-neutral-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all"
+              className="w-full pl-11 pr-4 py-3 bg-white/80 border border-neutral-600/30 rounded-xl text-neutral-50 placeholder-neutral-400 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
             />
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="md:col-span-3 bg-brand-500 hover:bg-brand-600 disabled:bg-neutral-700 disabled:text-neutral-400 text-white font-extrabold text-sm py-3 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+            className="md:col-span-3 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 disabled:from-neutral-600 disabled:to-neutral-700 disabled:text-neutral-400 text-white font-extrabold text-sm py-3 px-6 rounded-xl transition-all shadow-md shadow-brand-500/20 hover:shadow-lg hover:shadow-brand-500/30 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
-                <span className="w-4 h-4 border-2 border-neutral-900 border-t-transparent rounded-full animate-spin" aria-hidden="true" />
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden="true" />
                 <span>Consulting AI...</span>
               </>
             ) : (
@@ -138,7 +138,7 @@ const DiscoveryDashboard = ({
               key={idx}
               type="button"
               onClick={() => handleSuggestionClick(s.city, s.dates)}
-              className="px-3 py-1 bg-neutral-900/60 border border-neutral-700/50 rounded-full text-neutral-300 hover:border-brand-500 hover:text-brand-500 transition-all focus:ring-1 focus:ring-brand-500"
+              className="px-3 py-1 bg-white/60 border border-neutral-600/20 rounded-full text-neutral-200 hover:bg-white hover:border-brand-500 hover:text-brand-500 shadow-sm transition-all focus:ring-1 focus:ring-brand-500"
             >
               {s.city} ({s.dates})
             </button>
@@ -154,7 +154,7 @@ const DiscoveryDashboard = ({
           aria-modal="true"
           aria-labelledby="settings-title"
         >
-          <div className="bg-neutral-800 border border-neutral-700 rounded-2xl w-full max-w-md p-6 relative shadow-2xl animate-scale-in">
+          <div className="glass-card rounded-2xl w-full max-w-md p-6 relative shadow-2xl animate-scale-in">
             <button
               onClick={() => setShowSettings(false)}
               className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-200 p-1 rounded-lg focus:ring-1"
@@ -183,12 +183,12 @@ const DiscoveryDashboard = ({
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
                   placeholder="AIzaSy..."
-                  className="w-full px-3 py-2 bg-neutral-900 border border-neutral-700 rounded-lg text-neutral-200 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500"
+                  className="w-full px-3 py-2 bg-white border border-neutral-600/30 rounded-lg text-neutral-50 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 shadow-inner"
                 />
               </div>
 
               {/* Status display */}
-              <div className="p-3 bg-neutral-900/60 rounded-xl border border-neutral-700/40 text-xs flex gap-2">
+              <div className="p-3 bg-white/40 rounded-xl border border-neutral-600/25 text-xs flex gap-2 shadow-sm">
                 {apiKey ? (
                   <>
                     <CheckCircle2 className="w-4.5 h-4.5 text-emerald-500 shrink-0" />
@@ -212,7 +212,7 @@ const DiscoveryDashboard = ({
                 <button
                   type="button"
                   onClick={() => setShowSettings(false)}
-                  className="px-4 py-2 bg-neutral-700 hover:bg-neutral-600 rounded-lg text-xs font-semibold text-neutral-200"
+                  className="px-4 py-2 bg-neutral-600 hover:bg-neutral-500 rounded-lg text-xs font-semibold text-neutral-200 shadow-sm transition-all"
                 >
                   Cancel
                 </button>
@@ -237,7 +237,7 @@ const DiscoveryDashboard = ({
 
       {/* Dynamic Event Surface (Suggested Events) */}
       {eventsData && (
-        <section className="bg-neutral-800 border border-neutral-700/60 rounded-2xl p-6 shadow-lg animate-fade-in-up" aria-labelledby="events-heading">
+        <section className="glass-card rounded-2xl p-6 shadow-lg animate-fade-in-up" aria-labelledby="events-heading">
           <div className="flex items-center gap-2 text-brand-500 border-b border-neutral-700/50 pb-4 mb-5">
             <Calendar className="w-5 h-5" aria-hidden="true" />
             <h3 id="events-heading" className="text-lg font-bold font-display uppercase tracking-wide">
@@ -252,7 +252,7 @@ const DiscoveryDashboard = ({
             {(eventsData.events || []).map((evt) => (
               <div
                 key={evt.id}
-                className="bg-neutral-900/60 p-5 rounded-xl border border-neutral-800 hover:border-brand-500/25 transition-all flex flex-col justify-between"
+                className="bg-white/50 hover:bg-white p-5 rounded-xl border border-neutral-600/20 hover:border-brand-500/35 hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">

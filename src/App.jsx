@@ -93,14 +93,14 @@ function App() {
   }, []);
 
   return (
-    <div className="flex-grow flex flex-col min-h-screen bg-neutral-900 text-neutral-100 selection:bg-brand-500/20">
+    <div className="flex-grow flex flex-col min-h-screen bg-transparent text-neutral-100 selection:bg-brand-500/20">
       {/* Skip links for screen reader accessibility */}
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-500 text-white px-4 py-2 rounded-lg font-bold z-50">
         Skip to main content
       </a>
 
       {/* Accessible Header */}
-      <header className="border-b border-neutral-800/80 bg-neutral-900/90 backdrop-blur sticky top-0 z-40" role="banner">
+      <header className="border-b border-white/25 bg-white/70 backdrop-blur-md sticky top-0 z-40" role="banner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-500 flex items-center justify-center shadow-lg shadow-brand-500/10" aria-hidden="true">
@@ -117,7 +117,7 @@ function App() {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="text-[11px] font-semibold text-neutral-400 bg-neutral-800/50 px-2.5 py-1 rounded-full border border-neutral-700/50 flex items-center gap-1.5">
+            <span className="text-[11px] font-bold text-emerald-700 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20 flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
               WCAG 2.1 AA Compliant
             </span>
@@ -188,7 +188,7 @@ function App() {
           {/* Sidebar / Previous Expeditions Area (Right: 3 cols) */}
           <aside className="xl:col-span-3 space-y-6" role="complementary" aria-label="Search history and details">
             {/* Previous Expeditions Card */}
-            <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-2xl p-5">
+            <div className="glass-card rounded-2xl p-5">
               <div className="flex items-center gap-2 text-neutral-300 font-bold font-display uppercase tracking-wide text-xs mb-4">
                 <History className="w-4 h-4 text-brand-500" aria-hidden="true" />
                 <span>Expedition Log</span>
@@ -201,8 +201,8 @@ function App() {
                       onClick={() => handleSearch(h.city, h.dates)}
                       className={`w-full text-left p-3 rounded-xl border transition-all text-xs flex justify-between items-center ${
                         activeCity.toLowerCase() === h.city.toLowerCase()
-                          ? 'bg-brand-500/10 border-brand-500/40 text-brand-400 font-bold'
-                          : 'bg-neutral-900/40 border-neutral-800 hover:border-neutral-700 text-neutral-300'
+                          ? 'bg-brand-500/15 border-brand-500/40 text-brand-700 font-bold shadow-sm'
+                          : 'bg-white/40 border-neutral-600/20 hover:border-brand-500/40 hover:bg-white text-neutral-200 shadow-sm'
                       }`}
                       aria-label={`Reload search for ${h.city}`}
                     >
@@ -224,7 +224,7 @@ function App() {
             </div>
 
             {/* Cultural Connect Values Callout */}
-            <div className="bg-neutral-800/20 border border-neutral-800 rounded-2xl p-5 space-y-3">
+            <div className="glass-card rounded-2xl p-5 space-y-3">
               <div className="flex items-center gap-2 text-amber-500/80 font-bold font-display uppercase tracking-wide text-[10px]">
                 <BookOpen className="w-4 h-4" aria-hidden="true" />
                 <span>Our Heritage Philosophy</span>
@@ -238,7 +238,7 @@ function App() {
       </main>
 
       {/* Accessible Footer */}
-      <footer className="border-t border-neutral-800 bg-neutral-955 py-8 mt-12 text-center text-xs text-neutral-500" role="contentinfo">
+      <footer className="border-t border-white/20 bg-neutral-955/40 backdrop-blur-sm py-8 mt-12 text-center text-xs text-neutral-500" role="contentinfo">
         <div className="max-w-7xl mx-auto px-4 space-y-2">
           <p>© {new Date().getFullYear()} CultureConnect. All rights reserved.</p>
           <p className="text-[10px] text-neutral-600">

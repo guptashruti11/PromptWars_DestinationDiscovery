@@ -506,6 +506,9 @@ const callGeminiApi = async (systemPrompt, userPrompt, apiKey) => {
  * City Name -> Tourist traps and local hidden gems
  */
 export const getAntiTouristData = async (cityName) => {
+  if (!cityName || !cityName.trim()) {
+    throw new Error("Location parameter cannot be empty");
+  }
   const normalizedCity = cityName.trim().toLowerCase();
   const apiKey = getApiKey();
 
@@ -541,6 +544,9 @@ export const getAntiTouristData = async (cityName) => {
  * Location Name -> Multi-sensory narrative script
  */
 export const getHeritageNarrative = async (locationName) => {
+  if (!locationName || !locationName.trim()) {
+    throw new Error("Location parameter cannot be empty");
+  }
   const normalizedLoc = locationName.trim().toLowerCase();
   const apiKey = getApiKey();
 
@@ -576,6 +582,9 @@ export const getHeritageNarrative = async (locationName) => {
  * Destination + Travel Dates -> Simulated cultural happenings
  */
 export const getDynamicEvents = async (destinationName, dateRange) => {
+  if (!destinationName || !destinationName.trim()) {
+    throw new Error("Location parameter cannot be empty");
+  }
   const normalizedDest = destinationName.trim().toLowerCase();
   const apiKey = getApiKey();
 
