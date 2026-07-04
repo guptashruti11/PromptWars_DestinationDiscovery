@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { retrieveAntiTouristMetrics, synthesizeHeritageLore, compileCulturalCalendar, saveApiKey } from '../src/services/aiService';
+import { retrieveAntiTouristMetrics, synthesizeHeritageLore, compileCulturalCalendar, saveApiKey, generateArtisanIntroMessage } from '../src/services/aiService';
 
 describe('CultureConnect GenAI Service Layer Tests', () => {
   const originalFetch = global.fetch;
@@ -245,6 +245,19 @@ describe('CultureConnect GenAI Service Layer Tests', () => {
       const res = await compileCulturalCalendar('Kyoto', 'May 12 - May 20');
       expect(res.dateRange).toBe('May 12 - May 20');
       expect(res.events.length).toBeGreaterThan(0);
+    });
+  });
+
+  // ==========================================================
+  // SUITE 5: Host Connection Message Helper
+  // ==========================================================
+  describe('Host Connection Message Helper', () => {
+    it('should generate a highly detailed and personalized intro message', () => {
+      const msg = generateArtisanIntroMessage('Alice', 'Kyoto', 'Gio-ji', 'Moss Temple');
+      expect(msg).toContain('Alice');
+      expect(msg).toContain('Kyoto');
+      expect(msg).toContain('Gio-ji');
+      expect(msg).toContain('Moss Temple');
     });
   });
 });

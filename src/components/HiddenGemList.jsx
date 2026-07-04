@@ -6,7 +6,7 @@ import { AlertOctagon, Compass, MapPin, Sparkles, ChevronRight } from 'lucide-re
  * Renders the Anti-Tourist analysis: traps side-by-side with authentic artisan locations.
  * Includes interactive navigation to trigger storytelling narratives.
  */
-const HiddenGemList = ({ data, onSelectGem }) => {
+const HiddenGemList = ({ data, onSelectGem, onConnect }) => {
   const traps = useMemo(() => data.touristTraps || [], [data]);
   const gems = useMemo(() => data.hiddenGems || [], [data]);
 
@@ -16,6 +16,13 @@ const HiddenGemList = ({ data, onSelectGem }) => {
       onSelectGem(`${gemName}, ${data.city}`);
     }
   }, [data.city, onSelectGem]);
+
+  // Callback to handle artisan connection
+  const handleConnectClick = useCallback((gemName, gemType) => {
+    if (onConnect) {
+      onConnect(gemName, gemType);
+    }
+  }, [onConnect]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in-up">
@@ -113,15 +120,24 @@ const HiddenGemList = ({ data, onSelectGem }) => {
                   </div>
                 </div>
 
-                {/* Narrative Action Button */}
-                <button
-                  onClick={() => handleSelect(gem.name)}
-                  className="flex items-center justify-center gap-1.5 self-end md:self-start bg-neutral-800 hover:bg-brand-500 hover:text-neutral-900 text-brand-400 font-bold text-xs py-2 px-3.5 rounded-lg border border-neutral-700 hover:border-transparent shadow-sm transition-all group/btn"
-                  aria-label={`Listen to historical story about ${gem.name}`}
-                >
-                  <span>Story</span>
-                  <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" aria-hidden="true" />
-                </button>
+                {/* Narrative & Connection Actions */}
+                <div className="flex flex-row md:flex-col gap-2 self-end md:self-start">
+                  <button
+                    onClick={() => handleSelect(gem.name)}
+                    className="flex items-center justify-center gap-1.5 bg-neutral-800 hover:bg-brand-500 hover:text-neutral-900 text-brand-400 font-bold text-xs py-2 px-3.5 rounded-lg border border-neutral-700 hover:border-transparent shadow-sm transition-all group/btn"
+                    aria-label={`Listen to historical story about ${gem.name}`}
+                  >
+                    <span>Story</span>
+                    <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" aria-hidden="true" />
+                  </button>
+                  <button
+                    onClick={() => handleConnectClick(gem.name, gem.type)}
+                    className="flex items-center justify-center gap-1.5 bg-brand-500 hover:bg-brand-600 text-neutral-900 font-extrabold text-xs py-2 px-3.5 rounded-lg shadow-sm transition-all"
+                    aria-label={`Connect with local host at ${gem.name}`}
+                  >
+                    <span>Meet Host</span>
+                  </button>
+                </div>
               </div>
             </li>
           ))}

@@ -614,3 +614,18 @@ export const compileCulturalCalendar = async (destinationName, dateRange) => {
     }, import.meta.env.MODE === 'test' ? 0 : 50);
   });
 };
+
+/**
+ * Utility: Generates a personalized introductory message to connect travelers with local hosts/artisans.
+ * Aligns with the core mission to connect visitors directly to local communities.
+ * 
+ * @param {string} userName Name of the traveler.
+ * @param {string} cityName Destination city.
+ * @param {string} gemName Target hidden gem or artisan spot.
+ * @param {string} gemType Type of cultural experience.
+ * @returns {string} Highly customized message draft.
+ */
+export const generateArtisanIntroMessage = (userName, cityName, gemName, gemType) => {
+  const name = userName ? userName.trim() : 'a curious traveler';
+  return `Hello! I am planning an upcoming trip to ${cityName} and was recommended to connect with your authentic experience "${gemName}" (${gemType}) via the LoreScapes heritage platform. I am deeply interested in learning more about your localized craftsmanship and community history. Could you share your general visiting hours or availability for a community-led session? Looking forward to meeting you! Best regards, ${name}`;
+};

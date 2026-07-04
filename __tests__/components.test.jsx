@@ -106,6 +106,16 @@ describe('CultureConnect UI Components Unit & Integration Tests', () => {
 
       expect(mockSelectGem).toHaveBeenCalledWith('Quiet Grove, Kyoto');
     });
+
+    it('should invoke connect host callback when Meet Host button is clicked', () => {
+      const mockOnConnect = vi.fn();
+      render(<HiddenGemList data={mockData} onSelectGem={mockSelectGem} onConnect={mockOnConnect} />);
+
+      const connectButton = screen.getByRole('button', { name: /Connect with local host at Quiet Grove/i });
+      fireEvent.click(connectButton);
+
+      expect(mockOnConnect).toHaveBeenCalledWith('Quiet Grove', 'Garden');
+    });
   });
 
   // ==========================================

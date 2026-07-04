@@ -3,7 +3,7 @@ import { Compass, History, BookOpen, AlertCircle, ChevronRight } from 'lucide-re
 import DiscoveryDashboard from './components/DiscoveryDashboard';
 import HiddenGemList from './components/HiddenGemList';
 import StorytellingCard from './components/StorytellingCard';
-import { retrieveAntiTouristMetrics, compileCulturalCalendar, synthesizeHeritageLore } from './services/aiService';
+import { retrieveAntiTouristMetrics, compileCulturalCalendar, synthesizeHeritageLore, generateArtisanIntroMessage } from './services/aiService';
 
 /**
  * App Component
@@ -28,6 +28,14 @@ function App() {
   const [storyLoading, setStoryLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   
+  // Connection deck states (Problem Statement alignment for "connecting visitors to cultural experiences")
+  const [connectGemName, setConnectGemName] = useState('');
+  const [connectGemType, setConnectGemType] = useState('');
+  const [travelerName, setTravelerName] = useState('');
+  const [draftMessage, setDraftMessage] = useState('');
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
+
   // Search history state
   const [history, setHistory] = useState([]);
   
@@ -132,6 +140,35 @@ function App() {
     }
   }, [storyCache]);
 
+  // Handle click to connect with local host/artisan
+  const handleConnectArtisan = useCallback((gemName, gemType) => {
+    setConnectGemName(gemName);
+    setConnectGemType(gemType);
+    setMessageSent(false);
+    setIsSendingMessage(false);
+    
+    // Generate initial draft using the helper
+    const initialMsg = generateArtisanIntroMessage('', activeCity || 'your destination', gemName, gemType);
+    setDraftMessage(initialMsg);
+  }, [activeCity]);
+
+  // Update draft message if traveler name changes
+  const handleNameChange = useCallback((newName) => {
+    setTravelerName(newName);
+    const updatedMsg = generateArtisanIntroMessage(newName, activeCity || 'your destination', connectGemName, connectGemType);
+    setDraftMessage(updatedMsg);
+  }, [activeCity, connectGemName, connectGemType]);
+
+  // Handle sending introductory inquiry to host
+  const handleSendMessage = useCallback(async (e) => {
+    e.preventDefault();
+    setIsSendingMessage(true);
+    // Simulate API forwarding delay
+    await new Promise(resolve => setTimeout(resolve, 600));
+    setIsSendingMessage(false);
+    setMessageSent(true);
+  }, []);
+
   return (
     <div className="flex-grow flex flex-col min-h-screen bg-transparent text-neutral-100 selection:bg-brand-500/20">
       {/* Skip links for screen reader accessibility */}
@@ -221,6 +258,7 @@ function App() {
               <HiddenGemList
                 data={antiTouristData}
                 onSelectGem={handleSelectGem}
+                onConnect={handleConnectArtisan}
               />
             )}
           </div>
@@ -286,6 +324,93 @@ function App() {
           </p>
         </div>
       </footer>
+
+      {/* Stateful Local Connection Deck Modal */}
+      {connectGemName && (
+        <div 
+          className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-scale-in"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="connect-title"
+        >
+          <div className="glass-card rounded-2xl p-6 max-w-lg w-full relative">
+            <h3 id="connect-title" className="text-xl font-bold font-display text-neutral-50 mb-2">
+              Connect with Local Host
+            </h3>
+            <p className="text-xs text-neutral-400 mb-6 leading-relaxed">
+              LoreScapes helps you connect directly with community guardians. Send an intro inquiry to reserve a session or ask questions.
+            </p>
+
+            {messageSent ? (
+              <div className="space-y-6 py-4 text-center">
+                <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-xl font-bold animate-pulse">
+                  ✓
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-neutral-100">Message Dispatched!</h4>
+                  <p className="text-xs text-neutral-400 mt-1.5 leading-relaxed">
+                    Your inquiry has been forwarded directly to the guardian of <strong>{connectGemName}</strong>. They typically reply within 24 hours.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setConnectGemName('')}
+                  className="px-5 py-2 bg-brand-500 hover:bg-brand-600 text-neutral-900 font-bold text-xs rounded-xl shadow-md transition-all"
+                >
+                  Return to Exploration
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSendMessage} className="space-y-4">
+                <div>
+                  <label htmlFor="traveler-name-input" className="block text-xs font-bold text-neutral-300 uppercase tracking-wider mb-1.5">
+                    Your Name
+                  </label>
+                  <input
+                    id="traveler-name-input"
+                    type="text"
+                    required
+                    value={travelerName}
+                    onChange={(e) => handleNameChange(e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full px-4 py-2.5 bg-slate-900/60 border border-white/5 rounded-xl text-neutral-50 placeholder-neutral-400 focus:bg-slate-950 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="draft-message-input" className="block text-xs font-bold text-neutral-300 uppercase tracking-wider mb-1.5">
+                    AI-Assisted Message Draft
+                  </label>
+                  <textarea
+                    id="draft-message-input"
+                    required
+                    rows={6}
+                    value={draftMessage}
+                    onChange={(e) => setDraftMessage(e.target.value)}
+                    className="w-full px-4 py-2.5 bg-slate-900/60 border border-white/5 rounded-xl text-neutral-50 placeholder-neutral-400 focus:bg-slate-950 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-xs transition-all shadow-inner leading-relaxed resize-none"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => setConnectGemName('')}
+                    className="px-4 py-2 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-300 hover:text-neutral-100 font-semibold text-xs rounded-lg transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSendingMessage}
+                    className="px-5 py-2 bg-brand-500 hover:bg-brand-600 disabled:bg-neutral-600 disabled:text-neutral-400 text-neutral-900 font-extrabold text-xs rounded-lg shadow-sm transition-all"
+                  >
+                    {isSendingMessage ? 'Sending...' : 'Send Message'}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
