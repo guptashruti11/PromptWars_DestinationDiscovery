@@ -10,12 +10,12 @@
 
 // Helper to get Gemini API Key from environment or localStorage
 export const getApiKey = () => {
-  return import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('CULTURE_CONNECT_GEMINI_KEY') || '';
+  return import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('LORE_SCAPES_GEMINI_KEY') || '';
 };
 
 // Helper to save Gemini API Key to localStorage
 export const saveApiKey = (key) => {
-  localStorage.setItem('CULTURE_CONNECT_GEMINI_KEY', key.trim());
+  localStorage.setItem('LORE_SCAPES_GEMINI_KEY', key.trim());
 };
 
 /**
@@ -505,7 +505,7 @@ const callGeminiApi = async (systemPrompt, userPrompt, apiKey) => {
  * Service API: The "Anti-Tourist" Engine
  * City Name -> Tourist traps and local hidden gems
  */
-export const getAntiTouristData = async (cityName) => {
+export const retrieveAntiTouristMetrics = async (cityName) => {
   if (!cityName || !cityName.trim()) {
     throw new Error("Location parameter cannot be empty");
   }
@@ -543,7 +543,7 @@ export const getAntiTouristData = async (cityName) => {
  * Service API: Immersive Heritage Storyteller
  * Location Name -> Multi-sensory narrative script
  */
-export const getHeritageNarrative = async (locationName) => {
+export const synthesizeHeritageLore = async (locationName) => {
   if (!locationName || !locationName.trim()) {
     throw new Error("Location parameter cannot be empty");
   }
@@ -581,7 +581,7 @@ export const getHeritageNarrative = async (locationName) => {
  * Service API: Dynamic Event Surface
  * Destination + Travel Dates -> Simulated cultural happenings
  */
-export const getDynamicEvents = async (destinationName, dateRange) => {
+export const compileCulturalCalendar = async (destinationName, dateRange) => {
   if (!destinationName || !destinationName.trim()) {
     throw new Error("Location parameter cannot be empty");
   }

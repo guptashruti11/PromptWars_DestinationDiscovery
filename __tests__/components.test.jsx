@@ -45,7 +45,7 @@ describe('CultureConnect UI Components Unit & Integration Tests', () => {
 
       // Verify that after saving, state handles confirmation
       await waitFor(() => {
-        expect(localStorage.getItem('CULTURE_CONNECT_GEMINI_KEY')).toBe('test-key');
+        expect(localStorage.getItem('LORE_SCAPES_GEMINI_KEY')).toBe('test-key');
       });
     });
 

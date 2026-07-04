@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { Search, Calendar, Settings, X, ShieldAlert, Sparkles, CheckCircle2 } from 'lucide-react';
 import { getApiKey, saveApiKey } from '../services/aiService';
 
@@ -17,6 +17,13 @@ const DiscoveryDashboard = ({
   const [showSettings, setShowSettings] = useState(false);
   const [apiKey, setApiKey] = useState(getApiKey());
   const [keySavedMessage, setKeySavedMessage] = useState(false);
+
+  // Sync inputs with currentQuery when it changes (e.g. from history logs)
+  useEffect(() => {
+    if (currentQuery) {
+      setCityInput(currentQuery);
+    }
+  }, [currentQuery]);
 
   // Suggested quick-search locations
   const suggestions = useMemo(() => [

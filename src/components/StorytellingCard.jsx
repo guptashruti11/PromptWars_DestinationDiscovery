@@ -6,7 +6,7 @@ import { BookOpen, MapPin, Eye, Volume2, Sparkles, HelpCircle, Play, Pause, Squa
  * Displays GenAI heritage narratives with sensory breakdowns and interactive narration.
  * Implements WCAG 2.1 AA accessibility (ARIA roles, keyboard nav) and memoized rendering.
  */
-const StorytellingCard = ({ data, onDismiss }) => {
+const StorytellingCard = ({ data }) => {
   const [activeTab, setActiveTab] = useState('history'); // 'history' | 'culture' | 'legend'
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);

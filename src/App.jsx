@@ -3,7 +3,7 @@ import { Compass, History, BookOpen, AlertCircle, ChevronRight } from 'lucide-re
 import DiscoveryDashboard from './components/DiscoveryDashboard';
 import HiddenGemList from './components/HiddenGemList';
 import StorytellingCard from './components/StorytellingCard';
-import { getAntiTouristData, getDynamicEvents, getHeritageNarrative } from './services/aiService';
+import { retrieveAntiTouristMetrics, compileCulturalCalendar, synthesizeHeritageLore } from './services/aiService';
 
 /**
  * App Component
@@ -60,8 +60,8 @@ function App() {
     try {
       // Parallel requests to mock/live API endpoints
       const [antiTouristRes, eventsRes] = await Promise.all([
-        getAntiTouristData(trimmedCity),
-        getDynamicEvents(trimmedCity, trimmedDates)
+        retrieveAntiTouristMetrics(trimmedCity),
+        compileCulturalCalendar(trimmedCity, trimmedDates)
       ]);
 
       startTransition(() => {
@@ -115,7 +115,7 @@ function App() {
     }
 
     try {
-      const narrativeRes = await getHeritageNarrative(gemNameWithCity);
+      const narrativeRes = await synthesizeHeritageLore(gemNameWithCity);
       startTransition(() => {
         setStorytellingData(narrativeRes);
         // Cache story
