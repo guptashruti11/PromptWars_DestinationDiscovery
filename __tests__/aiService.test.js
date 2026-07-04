@@ -5,9 +5,8 @@ describe('CultureConnect GenAI Service Layer Tests', () => {
   const originalFetch = global.fetch;
 
   beforeEach(() => {
-    // Stub the environment API Key to force live API branch in tests
-    vi.stubEnv('VITE_GEMINI_API_KEY', 'mock_gemini_key');
-    saveApiKey('');
+    // Save mock key to localStorage to force live API branch in tests
+    saveApiKey('mock_gemini_key');
   });
 
   afterEach(() => {
@@ -222,8 +221,7 @@ describe('CultureConnect GenAI Service Layer Tests', () => {
   // ==========================================================
   describe('Fallback Mock Data Engine (No API Key)', () => {
     beforeEach(() => {
-      // Clear environment variable and storage key to force fallback mode
-      vi.stubEnv('VITE_GEMINI_API_KEY', '');
+      // Clear storage key to force fallback mode
       saveApiKey('');
     });
 

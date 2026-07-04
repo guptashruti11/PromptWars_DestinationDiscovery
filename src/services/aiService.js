@@ -8,9 +8,9 @@
  * for rapid testing and out-of-the-box operations.
  */
 
-// Helper to get Gemini API Key from environment or localStorage
+// Helper to get Gemini API Key from localStorage
 export const getApiKey = () => {
-  return import.meta.env.VITE_GEMINI_API_KEY || localStorage.getItem('LORE_SCAPES_GEMINI_KEY') || '';
+  return localStorage.getItem('LORE_SCAPES_GEMINI_KEY') || '';
 };
 
 // Helper to save Gemini API Key to localStorage
