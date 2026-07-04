@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { Search, Calendar, Settings, X, ShieldAlert, Sparkles, CheckCircle2, ChevronRight, HelpCircle } from 'lucide-react';
+import { Search, Calendar, Settings, X, ShieldAlert, Sparkles, CheckCircle2 } from 'lucide-react';
 import { getApiKey, saveApiKey } from '../services/aiService';
 
 /**

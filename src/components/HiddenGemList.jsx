@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
-import { AlertOctagon, Compass, MapPin, Sparkles, ChevronRight, Info } from 'lucide-react';
+import { AlertOctagon, Compass, MapPin, Sparkles, ChevronRight } from 'lucide-react';
 
 /**
  * HiddenGemList Component

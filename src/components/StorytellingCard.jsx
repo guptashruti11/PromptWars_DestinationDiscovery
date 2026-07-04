@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { BookOpen, MapPin, Eye, Volume2, Sparkles, HelpCircle, Play, Pause, Square, AlertCircle } from 'lucide-react';
+import { BookOpen, MapPin, Eye, Volume2, Sparkles, HelpCircle, Play, Pause, Square } from 'lucide-react';
 
 /**
  * StorytellingCard Component

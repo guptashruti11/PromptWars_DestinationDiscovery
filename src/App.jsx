@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useTransition } from 'react';
-import { Compass, History, BookOpen, AlertCircle, HelpCircle, ChevronRight } from 'lucide-react';
+import { Compass, History, BookOpen, AlertCircle, ChevronRight } from 'lucide-react';
 import DiscoveryDashboard from './components/DiscoveryDashboard';
 import HiddenGemList from './components/HiddenGemList';
 import StorytellingCard from './components/StorytellingCard';
@@ -19,6 +19,10 @@ function App() {
   const [eventsData, setEventsData] = useState(null);
   const [storytellingData, setStorytellingData] = useState(null);
   
+  // Cache States for Efficiency optimization
+  const [searchCache, setSearchCache] = useState({});
+  const [storyCache, setStoryCache] = useState({});
+
   // Loading & Error States
   const [isLoading, setIsLoading] = useState(false);
   const [storyLoading, setStoryLoading] = useState(false);
@@ -28,10 +32,26 @@ function App() {
   const [history, setHistory] = useState([]);
   
   // React 18 Transition for non-blocking state updates
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   // Primary search execution coordinator
   const handleSearch = useCallback(async (city, dates) => {
+    const trimmedCity = city.trim();
+    const trimmedDates = dates.trim();
+    const cacheKey = `${trimmedCity.toLowerCase()}-${trimmedDates.toLowerCase()}`;
+
+    if (searchCache[cacheKey]) {
+      const cached = searchCache[cacheKey];
+      startTransition(() => {
+        setActiveCity(trimmedCity);
+        setActiveDates(trimmedDates);
+        setAntiTouristData(cached.antiTouristData);
+        setEventsData(cached.eventsData);
+        setStorytellingData(null);
+      });
+      return;
+    }
+
     setIsLoading(true);
     setErrorMessage('');
     // Reset storytelling on new city search to avoid confusion
@@ -40,20 +60,26 @@ function App() {
     try {
       // Parallel requests to mock/live API endpoints
       const [antiTouristRes, eventsRes] = await Promise.all([
-        getAntiTouristData(city),
-        getDynamicEvents(city, dates)
+        getAntiTouristData(trimmedCity),
+        getDynamicEvents(trimmedCity, trimmedDates)
       ]);
 
       startTransition(() => {
-        setActiveCity(city);
-        setActiveDates(dates);
+        setActiveCity(trimmedCity);
+        setActiveDates(trimmedDates);
         setAntiTouristData(antiTouristRes);
         setEventsData(eventsRes);
         
+        // Cache the result
+        setSearchCache(prev => ({
+          ...prev,
+          [cacheKey]: { antiTouristData: antiTouristRes, eventsData: eventsRes }
+        }));
+
         // Add to history if unique
         setHistory(prev => {
-          const item = { city, dates };
-          const exists = prev.some(h => h.city.toLowerCase() === city.toLowerCase());
+          const item = { city: trimmedCity, dates: trimmedDates };
+          const exists = prev.some(h => h.city.toLowerCase() === trimmedCity.toLowerCase());
           if (!exists) {
             return [item, ...prev.slice(0, 5)]; // Cap history at 6 items
           }
@@ -66,10 +92,19 @@ function App() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [searchCache]);
 
   // Storytelling trigger coordinator
   const handleSelectGem = useCallback(async (gemNameWithCity) => {
+    const cacheKey = gemNameWithCity.trim().toLowerCase();
+
+    if (storyCache[cacheKey]) {
+      startTransition(() => {
+        setStorytellingData(storyCache[cacheKey]);
+      });
+      return;
+    }
+
     setStoryLoading(true);
     setErrorMessage('');
     
@@ -83,6 +118,11 @@ function App() {
       const narrativeRes = await getHeritageNarrative(gemNameWithCity);
       startTransition(() => {
         setStorytellingData(narrativeRes);
+        // Cache story
+        setStoryCache(prev => ({
+          ...prev,
+          [cacheKey]: narrativeRes
+        }));
       });
     } catch (error) {
       console.error(error);
@@ -90,7 +130,7 @@ function App() {
     } finally {
       setStoryLoading(false);
     }
-  }, []);
+  }, [storyCache]);
 
   return (
     <div className="flex-grow flex flex-col min-h-screen bg-transparent text-neutral-100 selection:bg-brand-500/20">
