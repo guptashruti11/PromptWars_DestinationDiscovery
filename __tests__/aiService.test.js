@@ -215,4 +215,36 @@ describe('CultureConnect GenAI Service Layer Tests', () => {
       expect(result.city).toBe('Sanitized Output');
     });
   });
+
+  // ==========================================================
+  // SUITE 4: Fallback Mock Data Engine (No API Key)
+  // Ensures 100% test coverage of the local fallback branches
+  // ==========================================================
+  describe('Fallback Mock Data Engine (No API Key)', () => {
+    beforeEach(() => {
+      // Clear environment variable and storage key to force fallback mode
+      vi.stubEnv('VITE_GEMINI_API_KEY', '');
+      saveApiKey('');
+    });
+
+    it('should fall back to mock data for getAntiTouristData', async () => {
+      const res = await getAntiTouristData('Kyoto');
+      expect(res.city).toBe('Kyoto');
+      expect(res.touristTraps.length).toBeGreaterThan(0);
+      expect(res.hiddenGems.length).toBeGreaterThan(0);
+    });
+
+    it('should fall back to mock data for getHeritageNarrative', async () => {
+      const res = await getHeritageNarrative('Kyoto');
+      expect(res.location).toBe('Kyoto');
+      expect(res.title).toBeDefined();
+      expect(res.sensoryDetails).toBeDefined();
+    });
+
+    it('should fall back to mock data for getDynamicEvents', async () => {
+      const res = await getDynamicEvents('Kyoto', 'May 12 - May 20');
+      expect(res.dateRange).toBe('May 12 - May 20');
+      expect(res.events.length).toBeGreaterThan(0);
+    });
+  });
 });

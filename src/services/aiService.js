@@ -535,7 +535,7 @@ export const getAntiTouristData = async (cityName) => {
       } else {
         resolve(generateDynamicMock('antiTourist', cityName));
       }
-    }, 800); // Small delay to simulate network/AI generation
+    }, import.meta.env.MODE === 'test' ? 0 : 50); // Small delay to simulate network/AI generation
   });
 };
 
@@ -573,7 +573,7 @@ export const getHeritageNarrative = async (locationName) => {
       } else {
         resolve(generateDynamicMock('storyteller', locationName));
       }
-    }, 800);
+    }, import.meta.env.MODE === 'test' ? 0 : 50);
   });
 };
 
@@ -611,6 +611,6 @@ export const getDynamicEvents = async (destinationName, dateRange) => {
       } else {
         resolve(generateDynamicMock('events', destinationName, dateRange));
       }
-    }, 800);
+    }, import.meta.env.MODE === 'test' ? 0 : 50);
   });
 };
