@@ -114,7 +114,7 @@ const DiscoveryDashboard = ({
           <button
             type="submit"
             disabled={isLoading}
-            className="md:col-span-3 bg-brand-500 hover:bg-brand-600 disabled:bg-neutral-700 disabled:text-neutral-400 text-neutral-900 font-extrabold text-sm py-3 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
+            className="md:col-span-3 bg-brand-500 hover:bg-brand-600 disabled:bg-neutral-700 disabled:text-neutral-400 text-white font-extrabold text-sm py-3 px-6 rounded-xl transition-all shadow-md flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
@@ -218,7 +218,7 @@ const DiscoveryDashboard = ({
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-neutral-900 rounded-lg text-xs font-extrabold flex items-center gap-1.5"
+                  className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white rounded-lg text-xs font-extrabold flex items-center gap-1.5"
                 >
                   {keySavedMessage ? (
                     <>

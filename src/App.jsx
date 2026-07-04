@@ -95,7 +95,7 @@ function App() {
   return (
     <div className="flex-grow flex flex-col min-h-screen bg-neutral-900 text-neutral-100 selection:bg-brand-500/20">
       {/* Skip links for screen reader accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-500 text-neutral-900 px-4 py-2 rounded-lg font-bold z-50">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-500 text-white px-4 py-2 rounded-lg font-bold z-50">
         Skip to main content
       </a>
 
@@ -107,7 +107,7 @@ function App() {
               <Compass className="w-5 h-5 text-white" />
             </div>
             <div>
-              <span className="text-lg font-black tracking-tight font-display bg-gradient-to-r from-brand-100 to-amber-400 bg-clip-text text-transparent">
+              <span className="text-lg font-black tracking-tight font-display bg-gradient-to-r from-brand-600 to-heritage-600 bg-clip-text text-transparent">
                 CultureConnect
               </span>
               <span className="hidden sm:inline-block text-[10px] uppercase font-bold text-neutral-500 ml-2.5 tracking-widest border-l border-neutral-800 pl-2.5">
