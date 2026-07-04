@@ -14,6 +14,7 @@ const DiscoveryDashboard = ({
 }) => {
   const [cityInput, setCityInput] = useState('');
   const [datesInput, setDatesInput] = useState('');
+  const [dateInputType, setDateInputType] = useState('text');
   const [showSettings, setShowSettings] = useState(false);
   const [apiKey, setApiKey] = useState(getApiKey());
   const [keySavedMessage, setKeySavedMessage] = useState(false);
@@ -43,6 +44,7 @@ const DiscoveryDashboard = ({
   const handleSuggestionClick = useCallback((city, dates) => {
     setCityInput(city);
     setDatesInput(dates);
+    setDateInputType('text');
     onSearch(city, dates);
   }, [onSearch]);
 
@@ -99,7 +101,7 @@ const DiscoveryDashboard = ({
               value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
               placeholder="Enter destination (e.g. Tokyo, Paris, Rome)"
-              className="w-full pl-11 pr-4 py-3 bg-white/80 border border-neutral-600/30 rounded-xl text-neutral-50 placeholder-neutral-400 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
+              className="w-full pl-11 pr-4 py-3 bg-white/80 border border-neutral-600/30 rounded-xl text-slate-900 placeholder-neutral-400 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
             />
           </div>
 
@@ -110,11 +112,13 @@ const DiscoveryDashboard = ({
             </div>
             <input
               id="dates-input"
-              type="text"
+              type={dateInputType}
+              onFocus={() => setDateInputType('date')}
+              onBlur={() => { if (!datesInput) setDateInputType('text'); }}
               value={datesInput}
               onChange={(e) => setDatesInput(e.target.value)}
               placeholder="Travel Dates (e.g. May 10 - May 20)"
-              className="w-full pl-11 pr-4 py-3 bg-white/80 border border-neutral-600/30 rounded-xl text-neutral-50 placeholder-neutral-400 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
+              className="w-full pl-11 pr-4 py-3 bg-white/80 border border-neutral-600/30 rounded-xl text-slate-900 placeholder-neutral-400 focus:bg-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all shadow-inner"
             />
           </div>
 
@@ -181,16 +185,16 @@ const DiscoveryDashboard = ({
 
             <form onSubmit={handleSaveKey} className="space-y-4">
               <div>
-                <label htmlFor="api-key-input" className="block text-xs font-bold text-neutral-300 mb-1.5 uppercase tracking-wide">
+                <label htmlFor="gemini-key-input" className="block text-xs font-bold text-neutral-300 mb-1.5 uppercase tracking-wide">
                   Gemini API Key
                 </label>
                 <input
-                  id="api-key-input"
+                  id="gemini-key-input"
                   type="password"
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="AIzaSy..."
-                  className="w-full px-3 py-2 bg-white border border-neutral-600/30 rounded-lg text-neutral-50 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 shadow-inner"
+                  placeholder="Enter your Gemini API Key"
+                  className="w-full px-3 py-2 bg-white border border-neutral-600/30 rounded-lg text-slate-900 text-sm focus:border-brand-500 focus:ring-1 focus:ring-brand-500 shadow-inner"
                 />
               </div>
 
