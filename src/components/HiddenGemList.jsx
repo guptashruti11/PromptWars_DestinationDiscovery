@@ -82,7 +82,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
           {gems.map((gem, index) => (
             <li 
               key={index}
-              className="group bg-white/50 hover:bg-white p-5 rounded-xl border border-neutral-600/20 hover:border-brand-500/35 hover:shadow-md transition-all duration-300 relative"
+              className="group bg-slate-900/40 hover:bg-slate-900/80 p-5 rounded-xl border border-white/5 hover:border-brand-500/30 hover:shadow-md transition-all duration-300 relative"
             >
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div className="flex-1">
@@ -116,7 +116,7 @@ const HiddenGemList = ({ data, onSelectGem }) => {
                 {/* Narrative Action Button */}
                 <button
                   onClick={() => handleSelect(gem.name)}
-                  className="flex items-center justify-center gap-1.5 self-end md:self-start bg-white/80 hover:bg-brand-500 hover:text-white text-brand-700 font-bold text-xs py-2 px-3.5 rounded-lg border border-brand-500/30 hover:border-transparent shadow-sm transition-all group/btn"
+                  className="flex items-center justify-center gap-1.5 self-end md:self-start bg-neutral-800 hover:bg-brand-500 hover:text-neutral-900 text-brand-400 font-bold text-xs py-2 px-3.5 rounded-lg border border-neutral-700 hover:border-transparent shadow-sm transition-all group/btn"
                   aria-label={`Listen to historical story about ${gem.name}`}
                 >
                   <span>Story</span>

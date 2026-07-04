@@ -7,35 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Soft, eye-friendly light blue palette inspired by Dal Lake
+        // Rich Golden Lantern palette inspired by Hoi An twilight sunset
         brand: {
-          50: '#f0f9ff',  // Soft light sky blue tint
-          100: '#e0f2fe', // Very light blue select background
-          400: '#0369a1', // Darker sky blue for high-contrast text highlighting
-          500: '#0284c7', // Primary Sky Blue
-          600: '#0369a1', // Deep Sky Blue
-          700: '#075985', // Accent Indigo/Blue
-          900: '#0c4a6e', // Darkest Blue
-        },
-        heritage: {
           50: '#fffbeb',  // Warm amber light tint
-          500: '#d97706', // Warm Golden Amber (from the traditional shikhara boat)
-          600: '#b45309',
-          700: '#92400e',
+          100: '#fef3c7',
+          400: '#fbbf24', // Bright yellow-gold
+          500: '#f59e0b', // Primary Amber Gold (glowing lantern)
+          600: '#d97706',
+          700: '#b45309',
           900: '#78350f',
         },
+        heritage: {
+          50: '#fff5f5',  // Sunset orange tint
+          500: '#f97316', // Sunset Orange
+          600: '#ea580c', // Deep glowing orange-red
+          700: '#c2410c',
+          900: '#7c2d12',
+        },
         neutral: {
-          50: '#0f172a',   // Darkest text (Slate 900)
-          100: '#1e293b',  // Primary body text (Slate 800)
-          200: '#334155',  // Secondary text (Slate 700)
-          300: '#475569',  // Medium grey-blue text (Slate 600)
-          400: '#64748b',  // Soft slate-grey text (Slate 500)
-          500: '#94a3b8',  // Muted text (Slate 400)
-          600: '#cbd5e1',  // Soft border (Slate 300)
-          700: '#e2e8f0',  // Light border (Slate 200)
-          800: '#ffffff',  // Bright white card background
-          900: '#f0f7ff',  // Soothing eye-friendly light sky-blue background
-          955: '#e0f2fe',  // Soothing light blue footer background
+          50: '#f8fafc',   // Brightest text (Slate 50)
+          100: '#f1f5f9',  // Primary body text (Slate 100)
+          200: '#e2e8f0',  // Secondary text (Slate 200)
+          300: '#cbd5e1',  // Medium grey-blue text (Slate 300)
+          400: '#94a3b8',  // Soft slate-grey text (Slate 400)
+          500: '#64748b',  // Muted text (Slate 500)
+          600: '#475569',  // Darker slate (Slate 600)
+          700: '#334155',  // Dark border (Slate 700)
+          800: '#1e293b',  // Dark background elements (Slate 800)
+          900: '#0f172a',  // Slate 900
+          955: '#090d16',  // Deep dark slate background
         },
         danger: {
           50: '#fef2f2',

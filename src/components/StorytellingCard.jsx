@@ -105,13 +105,13 @@ const StorytellingCard = ({ data, onDismiss }) => {
         </div>
 
         {/* Audio control deck */}
-        <div className="flex items-center gap-2 bg-white/65 p-2 rounded-xl border border-neutral-600/25 self-start md:self-center shadow-sm">
+        <div className="flex items-center gap-2 bg-slate-900/60 p-2 rounded-xl border border-white/5 self-start md:self-center shadow-sm">
           <button
             onClick={handleNarrate}
             className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide transition-all ${
               isSpeaking && !isPaused
                 ? 'bg-heritage-600 text-white hover:bg-heritage-700 animate-pulse'
-                : 'bg-white/80 text-neutral-200 hover:bg-white hover:text-brand-600 border border-neutral-600/20 hover:border-brand-500/30 shadow-sm'
+                : 'bg-neutral-800 text-neutral-200 hover:bg-neutral-700 hover:text-brand-400 border border-neutral-700 hover:border-transparent shadow-sm'
             }`}
             aria-label={isSpeaking && !isPaused ? "Pause voice narrator" : "Listen to voice narrator"}
           >
@@ -131,7 +131,7 @@ const StorytellingCard = ({ data, onDismiss }) => {
           {isSpeaking && (
             <button
               onClick={stopNarration}
-              className="p-1.5 bg-white hover:bg-neutral-100 text-neutral-400 hover:text-neutral-200 border border-neutral-600/10 rounded-lg transition-colors shadow-sm"
+              className="p-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-400 hover:text-neutral-200 border border-neutral-700 rounded-lg transition-colors shadow-sm"
               aria-label="Stop audio narration"
             >
               <Square className="w-4 h-4" aria-hidden="true" />
@@ -147,7 +147,7 @@ const StorytellingCard = ({ data, onDismiss }) => {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Sight */}
-          <div className="bg-white/60 p-4 rounded-xl border border-neutral-600/20 flex gap-3 shadow-sm">
+          <div className="bg-slate-900/40 p-4 rounded-xl border border-white/5 flex gap-3 shadow-sm">
             <div className="p-2 bg-blue-500/10 text-blue-500 rounded-lg h-fit" aria-hidden="true">
               <Eye className="w-5 h-5" />
             </div>
@@ -158,7 +158,7 @@ const StorytellingCard = ({ data, onDismiss }) => {
           </div>
 
           {/* Sound */}
-          <div className="bg-white/60 p-4 rounded-xl border border-neutral-600/20 flex gap-3 shadow-sm">
+          <div className="bg-slate-900/40 p-4 rounded-xl border border-white/5 flex gap-3 shadow-sm">
             <div className="p-2 bg-emerald-500/10 text-emerald-600 rounded-lg h-fit" aria-hidden="true">
               <Volume2 className="w-5 h-5" />
             </div>
@@ -169,7 +169,7 @@ const StorytellingCard = ({ data, onDismiss }) => {
           </div>
 
           {/* Smell & Taste */}
-          <div className="bg-white/60 p-4 rounded-xl border border-neutral-600/20 flex gap-3 shadow-sm">
+          <div className="bg-slate-900/40 p-4 rounded-xl border border-white/5 flex gap-3 shadow-sm">
             <div className="p-2 bg-amber-500/10 text-amber-600 rounded-lg h-fit" aria-hidden="true">
               <Sparkles className="w-5 h-5" />
             </div>
@@ -237,7 +237,7 @@ const StorytellingCard = ({ data, onDismiss }) => {
 
       {/* Insider Tip Drawer */}
       {data.insiderTip && (
-        <footer className="mt-8 bg-heritage-50/60 p-4 rounded-xl border-l-4 border-heritage-500 border border-heritage-500/10 flex gap-3.5 shadow-sm">
+        <footer className="mt-8 bg-heritage-900/15 p-4 rounded-xl border-l-4 border-heritage-500 border border-heritage-500/20 flex gap-3.5 shadow-sm">
           <div className="text-heritage-500 p-0.5" aria-hidden="true">
             <HelpCircle className="w-5 h-5" />
           </div>
